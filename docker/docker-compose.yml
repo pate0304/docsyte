@@ -1,0 +1,84 @@
+# Auto-generated: Docker Compose stack for Docsyte local development
+# Includes: RAGFlow server, PostgreSQL metadata DB, Qdrant vector store
+
+version: '3.8'
+
+networks:
+  docsyte-dev:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  qdrant_data:
+  ragflow_data:
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: docsyte-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-ragflow}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ragflow}
+      POSTGRES_DB: ${POSTGRES_DB:-ragflow}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - docsyte-dev
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ragflow}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: docsyte-qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - docsyte-dev
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:6333/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  ragflow:
+    build:
+      context: .
+      dockerfile: ragflow.Dockerfile
+    container_name: docsyte-ragflow
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=${POSTGRES_USER:-ragflow}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-ragflow}
+      - POSTGRES_DB=${POSTGRES_DB:-ragflow}
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+      - SVR_HTTP_PORT=8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ragflow_data:/opt/ragflow/data
+    networks:
+      - docsyte-dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    restart: unless-stopped

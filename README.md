@@ -31,24 +31,25 @@ Open-source Model Context Protocol (MCP) server that ingests multi-format docume
    pnpm install
    ```
 
-2. **Start RAGFlow stack**:
+2. **Configure environment**:
    ```bash
-   cd docker
-   docker-compose up -d
+   cp .env.example .env
+   # Edit .env with your OpenAI API key and other settings
    ```
 
-3. **Ingest documentation**:
+3. **Start development stack**:
    ```bash
-   cd packages/ingest-cli
-   pip install -e .
-   docsyte-ingest --help
+   make dev-up
    ```
 
-4. **Start MCP server**:
+4. **Bootstrap knowledge base**:
    ```bash
-   cd apps/mcp-server
-   pnpm build
-   pnpm start
+   ./scripts/KB_BOOTSTRAP.sh
+   ```
+
+5. **Start MCP server** (when ready):
+   ```bash
+   pnpm dev
    ```
 
 ## 📖 Documentation

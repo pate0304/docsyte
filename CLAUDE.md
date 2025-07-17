@@ -76,12 +76,18 @@ directory_tree: |
   ├── docker/
   │   ├── docker-compose.yml
   │   └── ragflow.Dockerfile
+  ├── scripts/
+  │   └── KB_BOOTSTRAP.sh       # Knowledge base setup automation
   ├── tests/
+  │   └── health-check.test.ts  # Development stack health checks
   ├── .github/
   │   └── workflows/
   ├── docs/
   │   ├── arch.md
   │   └── quickstart.md
+  ├── .env.example              # Environment template
+  ├── .gitignore
+  ├── Makefile                  # Development shortcuts
   ├── README.md
   ├── LICENSE
   └── CONTRIBUTING.md
