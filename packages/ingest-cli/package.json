@@ -1,0 +1,10 @@
+{
+  "name": "@docsyte/ingest-cli",
+  "version": "0.1.0-alpha",
+  "description": "Python CLI for ingesting documentation into RAGFlow",
+  "scripts": {
+    "build": "python -m build",
+    "test": "python -m pytest",
+    "typecheck": "python -m mypy src/"
+  }
+}

@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "docsyte-ingest"
+version = "0.1.0-alpha"
+description = "Python CLI for ingesting documentation into RAGFlow"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    {name = "Docsyte Team"},
+]
+dependencies = [
+    "click>=8.1.0",
+    "httpx>=0.25.0",
+    "tqdm>=4.66.0",
+    "pydantic>=2.5.0",
+    "beautifulsoup4>=4.12.0",
+    "PyPDF2>=3.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "mypy>=1.7.0",
+    "black>=23.11.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+docsyte-ingest = "docsyte_ingest.cli:main"
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
