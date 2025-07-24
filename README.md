@@ -19,8 +19,29 @@ Open-source Model Context Protocol (MCP) server that ingests multi-format docume
 
 - Node.js 20+
 - Python 3.10+
-- Docker & Docker Compose
 - pnpm 8+
+- A managed RAG backend (see Backend Setup below)
+
+### Backend Setup
+
+Choose one of the following managed RAG backends:
+
+#### Option 1: Managed RAGFlow Instance
+1. Sign up for a managed RAGFlow service
+2. Get your instance URL and API key
+3. Set in `.env`:
+   ```bash
+   RAGFLOW_URL=https://your-ragflow-instance.com
+   RAGFLOW_API_KEY=your-ragflow-api-key
+   ```
+
+#### Option 2: LlamaCloud
+1. Sign up at [LlamaCloud](https://cloud.llamaindex.ai/)
+2. Generate an API key
+3. Set in `.env`:
+   ```bash
+   LLAMACLOUD_API_KEY=your-llamacloud-api-key
+   ```
 
 ### Installation
 
@@ -34,20 +55,10 @@ Open-source Model Context Protocol (MCP) server that ingests multi-format docume
 2. **Configure environment**:
    ```bash
    cp .env.example .env
-   # Edit .env with your OpenAI API key and other settings
+   # Edit .env with your chosen backend and OpenAI API key
    ```
 
-3. **Start development stack**:
-   ```bash
-   make dev-up
-   ```
-
-4. **Bootstrap knowledge base**:
-   ```bash
-   ./scripts/KB_BOOTSTRAP.sh
-   ```
-
-5. **Start MCP server** (when ready):
+3. **Start MCP server** (when ready):
    ```bash
    pnpm dev
    ```

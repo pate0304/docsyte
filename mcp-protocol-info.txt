@@ -1,0 +1,22 @@
+Model Context Protocol (MCP) Overview
+
+The Model Context Protocol is an open standard that enables AI applications to securely connect to external data sources and tools. 
+
+Key Benefits:
+- Standardized communication between AI models and external systems
+- Secure, permission-based access to data
+- Extensible tool and resource system
+- Support for real-time data access
+
+MCP Components:
+1. Servers: Provide tools and resources (like Docsyte)
+2. Clients: AI applications that consume MCP services
+3. Transports: Communication layers (stdio, HTTP, WebSocket)
+
+Docsyte implements MCP to provide:
+- Documentation search capabilities
+- Semantic Q&A functionality  
+- Citation tracking and source references
+- Integration with popular IDEs and AI tools
+
+For more information, visit: https://modelcontextprotocol.io

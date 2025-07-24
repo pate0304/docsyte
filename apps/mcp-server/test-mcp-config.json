@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "docsyte": {
+      "command": "node",
+      "args": [
+        "apps/mcp-server/dist/index.js"
+      ],
+      "env": {
+        "RAGFLOW_URL": "http://demo.ragflow.io",
+        "RAGFLOW_API_KEY": "test-key"
+      }
+    }
+  }
+}

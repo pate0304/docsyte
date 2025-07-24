@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "docsyte": {
+      "command": "node",
+      "args": ["/Users/shiva-mac/Documents/CB/docsyte/apps/mcp-server/dist/index.js"],
+      "env": {
+        "RAGFLOW_URL": "http://localhost:9380",
+        "RAGFLOW_API_KEY": "",
+        "NODE_ENV": "development"
+      }
+    }
+  }
+}

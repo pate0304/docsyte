@@ -1,7 +1,7 @@
 # Auto-generated: Custom RAGFlow image for Docsyte development
 # Extends official RAGFlow with CORS support and curl for health checks
 
-FROM infiniflow/ragflow:latest
+FROM infiniflow/ragflow:v0.19.1-slim
 
 # Install curl for health checks
 USER root
